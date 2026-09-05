@@ -45,18 +45,23 @@ def render_html(items, generated_at):
 <p>Updated {generated_at} UTC</p>
 """
 
-    for item in items:
-        title = item.get("title") or "Untitled"
-        url = item.get("url") or "#"
-        source = item.get("source") or ""
-        published = item.get("published") or ""
+    from html import escape
 
-        html += (
-            f'<p>'
-            f'<a href="{url}">{title}</a> '
-            f'[{source}] {published}'
-            f'</p>\n'
-        )
+    html = ""
+
+    for item in items:
+        title = escape(str(item.get("title") or "Untitled"))
+        url = escape(str(item.get("url") or "#"), quote=True)
+        source = escape(str(item.get("source") or ""))
+        published = escape(str(item.get("published") or ""))
+
+    html += (
+        "<p>"
+        f'<a href="{url}">{title}</a> '
+        f"[{source}] {published}"
+        "</p>\n"
+    )
+
 
 
     html += """
