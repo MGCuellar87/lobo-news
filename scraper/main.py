@@ -53,7 +53,7 @@ def render_html(items, generated_at):
 
         html += (
             f'<p>'
-            f'{url}{title}</a> '
+            f'{url}<a>{title}</a> '
             f'[{source}] {published}'
             f'</p>\n'
     )
