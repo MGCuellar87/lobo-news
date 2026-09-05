@@ -1,4 +1,4 @@
-from ..utils import soup_from, text_or_none
+from utils import soup_from, text_or_none
 
 BASE = "https://golobos.com"
 
