@@ -158,7 +158,7 @@ time { color:#666; font-size:12px; margin-left:6px; }
 footer { text-align:center; padding:20px; color:#666; border-top:1px solid #222; }
 """, encoding='utf-8')
 
-    print(f"Wrote {len(filtered)} items to site/index.html")
+    print(f"Wrote {len(filtered)} items to index.html")
 
 if __name__ == '__main__':
     main()
