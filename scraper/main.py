@@ -46,17 +46,18 @@ def render_html(items, generated_at):
 """
 
     for item in items:
-        title = item.get("title", "Untitled")
-        url = item.get("url", "#")
-        source = item.get("source", "")
-        published = item.get("published", "")
+        title = item.get("title") or "Untitled"
+        url = item.get("url") or "#"
+        source = item.get("source") or ""
+        published = item.get("published") or ""
 
         html += (
             f'<p>'
-            f'<a href="{url}">{title}</a>'
+            f'<a href="{url}">{title}</a> '
             f'[{source}] {published}'
             f'</p>\n'
-    )
+        )
+
 
     html += """
 </body>
