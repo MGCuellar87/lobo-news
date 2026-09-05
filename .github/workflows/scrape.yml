@@ -5,39 +5,39 @@ on:
   schedule:
     - cron: '*/30 * * * *'
 
-permission*:
+permissions:
   contents: write
 
 jobs:
-  scrap*:
+  scrape:
     runs-on: ubuntu-latest
 
-    *teps:
+    steps:
       - name: Checkout
-     *  uses: actions/checkout@v4
+        uses: actions/checkout@v4
 
-     *- name: Set up Python
-        uses* actions/setup-python@v5
-        w*th:
-          python-version: '3.1*'
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
 
-      - name: Install dependenc*es
+      - name: Install dependencies
         run: |
-          python*-m pip install --upgrade pip
-     *    pip install -r requirements.tx*
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
       - name: Run scraper
-      * run: |
-          python scraper/m*in.py
-
-      - name: Commit change*
         run: |
-          git conf*g user.name "github-actions[bot]"
-*         git config user.email "41*98282+github-actions[bot]@users.no*eply.github.com"
+          python scraper/main.py
 
-          git ad* .
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          if ! git diff --cach*d --quiet; then
-            git co*mit -m "Update Lobo news"
-        *   git push
+          git add .
+
+          if ! git diff --cached --quiet; then
+            git commit -m "Update Lobo news"
+            git push
           fi
