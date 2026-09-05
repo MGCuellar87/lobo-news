@@ -33,65 +33,85 @@ def within_age(dt, max_age_days: int):
     return dt >= datetime.utcnow() - timedelta(days=max_age_days)
 
 def render_html(items, generated_at):
-    # Simple Drudge-style page
     header = f"""
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>UNM Lobo Basketball — Latest Headlines</title>
-<link rel="stylesheet" href="assets/styles.css">
+<title>UNM Lobo Basketball - Latest Headlines</title>
+assets/styles.css
 </head>
 <body>
 <header>
-  <h1>UNM Lobo Basketball — Latest Headlines</h1>
-  <p class="meta">Updated {generated_at} UTC • Unofficial fan aggregation • Titles & links only</p>
+  <h1>UNM Lobo Basketball - Latest Headlines</h1>
+  <p class="meta">Updated {generated_at} UTC</p>
 </header>
 <main>
 """
+
     groups = {}
+
     for it in items:
-        d = it.get('published')
-        k = 'Unknown Date'
+        d = it.get("published")
+        k = "Unknown Date"
+
         if d:
             try:
                 dt = dateparser.parse(d)
-                k = dt.strftime('%Y-%m-%d')
+                k = dt.strftime("%Y-%m-%d")
             except Exception:
-                k = 'Unknown Date'
+                pass
+
         groups.setdefault(k, []).append(it)
 
-    # Sort dates descending
     def sort_key(date_key):
         try:
-            return datetime.strptime(date_key, '%Y-%m-%d')
+            return datetime.strptime(date_key, "%Y-%m-%d")
         except Exception:
             return datetime.min
 
     html_parts = [header]
 
     for day in sorted(groups.keys(), key=sort_key, reverse=True):
-        html_parts.append(f'<section class="day"><h2>{day}</h2><ul>')
-        for it in groups[day]:
-            title = it.get('title', 'Untitled')
-            url = it.get('url')
-            src = it.get('source')
-            time_str = ''
-            if it.get('published'):
-                time_str = f"<time datetime='{it['published']}'>{it['published']}</time>"
+        html_parts.append(
+            f'<section class="day"><h2>{day}</h2><ul>'
+        )
+
+        for it in groupstitle = it.get("title", "Untitled")
+            url = it.get("url", "#")
+            src = it.get("source", "")
+            published = it.get("published")
+
+            time_str = ""
+            if published:
+                time_str = (
+                    f"<time datetime='{published}'>{published}</time>"
+                )
+
             html_parts.append(
-                f"<li>
-  <a href="{url}" target="_blank" rel="noopener noreferrer">{title}</a>
-  <span class="src">[{src}]</span> {time_str}
-</li>"
+                f'<li>'
+                f'{url}{title}</a> '
+                f'<span class="src">[{src}]</span> '
+                f'{time_str}'
+                f'</li>'
             )
+
         html_parts.append("</ul></section>")
 
-    html_parts.append("</main><footer><p>Built with Lobo News Aggregator. <a href='https://github.com/'>Source</a></p></footer></body></html>")
+    html_parts.append("""
+</main>
+<footer>
+  <p>
+    Built with Lobo News Aggregator.
+    https://github.com/Source</a>
+  </p>
+</footer>
+</body>
+</html>
+""")
 
-    return "
-".join(html_parts)
+    return "\n".join(html_parts)
 
 
 def main():
