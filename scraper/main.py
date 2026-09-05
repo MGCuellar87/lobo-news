@@ -13,7 +13,7 @@ from sources.krqe import fetch as fetch_krqe
 from sources.cbssports import fetch as fetch_cbssports
 from sources.on3 import fetch as fetch_on3
 
-from utils import load_config, save_json, normalize_url, ensure_dir
+from utils import load_config, normalize_url, ensure_dir
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = ROOT / 'data'
