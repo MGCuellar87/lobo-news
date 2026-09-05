@@ -1,0 +1,31 @@
+min_article_age_days: 120  # ignore items older than this (approx.)
+max_items: 120             # total items to keep on homepage
+user_agent: "LoboNewsBot/1.0 (+https://example.com)"
+request_timeout: 20
+sleep_between_requests_seconds: 2
+
+sources:
+  - name: golobos
+    enabled: true
+    url: "https://golobos.com/sports/mbball/news"
+    overrides: {}
+
+  - name: dailylobo
+    enabled: true
+    url: "https://www.dailylobo.com/section/mens-basketball"
+    overrides: {}
+
+  - name: krqe
+    enabled: true
+    url: "https://www.krqe.com/sports/local-sports/"
+    overrides: {}
+
+  - name: cbssports
+    enabled: true
+    url: "https://www.cbssports.com/college-basketball/teams/NMEX/new-mexico-lobos/"
+    overrides: {}
+
+  - name: on3
+    enabled: true
+    url: "https://www.on3.com/college/new-mexico-lobos/category/basketball/news/"
+    overrides: {}
