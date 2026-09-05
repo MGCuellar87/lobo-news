@@ -134,7 +134,7 @@ def main():
 
     # Render HTML
     html = render_html(filtered, generated_at=datetime.utcnow().strftime('%Y-%m-%d %H:%M'))
-    (SITE_DIR / 'index.html').write_text(html, encoding='utf-8')
+    (ROOT / 'index.html').write_text(html, encoding='utf-8')
 
     # Write a minimal CSS if missing
     css_path = SITE_DIR / 'assets' / 'styles.css'
