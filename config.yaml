@@ -16,7 +16,7 @@ sources:
     overrides: {}
 
   - name: krqe
-    enabled: true
+    enabled: false
     url: "https://www.krqe.com/sports/local-sports/"
     overrides: {}
 
@@ -26,6 +26,6 @@ sources:
     overrides: {}
 
   - name: on3
-    enabled: true
+    enabled: false
     url: "https://www.on3.com/college/new-mexico-lobos/category/basketball/news/"
     overrides: {}
