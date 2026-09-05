@@ -72,7 +72,7 @@ def render_html(items, generated_at):
     html_parts = [header]
 
     for day in sorted(groups.keys(), key=sort_key, reverse=True):
-        html_parts.append(f"<section class="day"><h2>{day}</h2><ul>")
+        html_parts.append(f'<section class="day"><h2>{day}</h2><ul>')
         for it in groups[day]:
             title = it.get('title', 'Untitled')
             url = it.get('url')
